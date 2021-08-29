@@ -1,13 +1,12 @@
 import 'package:saadoptionsystem/Main/bloc.navigation_bloc/navigation_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/quiz_screen.dart';
-
+import 'package:saadoptionsystem/Splash/background.dart';
 import '../../../../rounded_button.dart';
-import 'Financial Page.dart';
-import 'background2.dart';
+import 'Financial PageGiveUp.dart';
 
 
-class AptitudeTestBody extends StatelessWidget with NavigationStates {
+class AptitudeTestBodyGiveUp extends StatelessWidget with NavigationStates {
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +75,7 @@ class AptitudeTestBody extends StatelessWidget with NavigationStates {
               press: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return QuizScreenBody();
+                    return FinancialPageGiveUp();
                   },
 
                 ));

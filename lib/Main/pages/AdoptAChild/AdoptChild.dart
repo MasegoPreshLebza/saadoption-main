@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:saadoptionsystem/Main/bloc.navigation_bloc/navigation_bloc.dart';
-import 'package:saadoptionsystem/Splash/background.dart';
+
 import 'package:saadoptionsystem/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'Assesments/AptitudeTest.dart';
+import 'Assesments/background2.dart';
 
 class AdopterPage extends StatelessWidget with NavigationStates {
   TextEditingController FullName = new TextEditingController();

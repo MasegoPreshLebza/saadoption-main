@@ -20,10 +20,10 @@ Future main() async {
 
   await Firebase.initializeApp();
 
-  runApp(FinancialPage());
+  runApp(FinancialPageGiveUp());
 }
 
-class FinancialPage extends StatelessWidget {
+class FinancialPageGiveUp extends StatelessWidget {
   static final String title = 'Document Upload';
 
 
@@ -51,9 +51,8 @@ class _MainPageState extends State<MainPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(FinancialPage.title),
+        title: Text(FinancialPageGiveUp.title),
         centerTitle: true,
-
       ),
       body: Container(
         padding: EdgeInsets.all(32),
@@ -62,7 +61,7 @@ class _MainPageState extends State<MainPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
     Text(
-    "FINANCIAL DOCUMENTS",
+    "DOCUMENT UPLOAD",
     style: TextStyle(fontWeight: FontWeight.bold),
     ),
               SizedBox(height: 48),

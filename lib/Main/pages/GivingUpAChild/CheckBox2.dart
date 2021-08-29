@@ -1,22 +1,22 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:saadoptionsystem/Main/pages/AdoptAChild/license_custom_page.dart';
 import 'package:saadoptionsystem/Main/sidebar/sidebar_layout.dart';
 import 'package:saadoptionsystem/Splash/background.dart';
 
 import 'package:saadoptionsystem/rounded_button.dart';
 
-import 'AdoptersScreen.dart';
-import 'license_custom_page.dart';
 
-class CheckBox extends StatefulWidget {
+
+class CheckBox2 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return CheckBoxWidget();
+    return CheckBox2Widget();
   }
 }
 
-class CheckBoxWidget extends State<CheckBox> {
+class CheckBox2Widget extends State<CheckBox2> {
   bool isChecked = false;
 
   @override

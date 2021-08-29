@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:saadoptionsystem/Main/bloc.navigation_bloc/navigation_bloc.dart';
-import 'package:saadoptionsystem/Main/pages/AdoptAChild/CheckBox.dart';
-import 'package:saadoptionsystem/Main/pages/NewsFeed/news.dart';
+
+import 'package:saadoptionsystem/Main/pages/GivingUpAChild/CheckBox2.dart';
+
 
 
 class Terms extends StatelessWidget with NavigationStates {
@@ -12,7 +13,7 @@ class Terms extends StatelessWidget with NavigationStates {
     return  Scaffold(
 
       body: SingleChildScrollView(
-        child: CheckBox(),
+        child: CheckBox2(),
       ),
 
     );

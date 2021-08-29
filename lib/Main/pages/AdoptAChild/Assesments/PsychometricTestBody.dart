@@ -35,7 +35,7 @@ class PsychometricTestBody extends StatelessWidget with NavigationStates {
                         builder: (context, constraints) => Container(
                           width: constraints.maxHeight * 0.5,
                           decoration: BoxDecoration(
-                            color: kPrimaryColor,
+                            color: kGreenColor,
                             borderRadius: BorderRadius.circular(50),
                           ),
                         ),

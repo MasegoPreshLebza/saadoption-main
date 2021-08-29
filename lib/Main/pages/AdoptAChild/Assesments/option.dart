@@ -25,14 +25,14 @@ class Option extends StatelessWidget {
                 return kPrimaryColor;
               } else if (index == qnController.selectedAns &&
                   qnController.selectedAns != qnController.correctAns) {
-                return kRedColor;
+                return kGreenColor;
               }
             }
             return kGrayColor;
           }
 
           IconData getTheRightIcon() {
-            return getTheRightColor() == kRedColor ? Icons.close : Icons.done;
+            return getTheRightColor() == kGreenColor ? Icons.close : Icons.done;
           }
 
           return InkWell(

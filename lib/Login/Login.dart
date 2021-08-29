@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:saadoptionsystem/Main/pages/AdoptAChild/TermsAndConditions.dart';
 import 'package:saadoptionsystem/Main/sidebar/sidebar_layout.dart';
 import '../Register/SignUp.dart';
 import '../rounded_button.dart';
@@ -37,7 +38,7 @@ class _LoginState extends State<Login> {
         await _auth.signInWithEmailAndPassword(
             email: _email, password: _password);
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SideBarLayout()));
+            context, MaterialPageRoute(builder: (context) => Terms()));
       } catch (e) {
         showError(e.message);
         print(e);

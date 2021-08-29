@@ -1,14 +1,19 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:saadoptionsystem/Main/bloc.navigation_bloc/navigation_bloc.dart';
+import '../../../constants.dart';
 import 'FeedDataModel.dart';
 import 'package:flutter/services.dart' as rootBundle;
+import 'package:flutter/src/material/colors.dart';
 
 class NewsFeedScreen extends StatelessWidget with NavigationStates {
   @override
+  int _selectedIndex = 0;
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     return Scaffold(
+        appBar: buildAppBar(context),
         body: FutureBuilder(
           future: ReadJsonData(),
           builder: (context,data){
@@ -58,7 +63,14 @@ class NewsFeedScreen extends StatelessWidget with NavigationStates {
               return Center(child: CircularProgressIndicator(),);
             }
           },
-        )
+        ),
+
+        bottomNavigationBar: BottomNavigationBar(
+    items: [
+    BottomNavigationBarItem(label: 'Feed', icon: Icon(Icons.refresh)),
+    BottomNavigationBarItem(label: 'Chat', icon: Icon(Icons.chat)),
+    ],
+    )
     );
   }
 
@@ -68,4 +80,11 @@ class NewsFeedScreen extends StatelessWidget with NavigationStates {
 
     return list.map((e) => FeedDataModel.fromJson(e)).toList();
   }
+  AppBar buildAppBar(BuildContext context) {
+    return  AppBar(
+      title: Text("NewsFeed to keep you Updated"),
+      centerTitle: true,
+    );
+  }
+
 }

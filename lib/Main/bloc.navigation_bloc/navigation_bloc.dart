@@ -1,11 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:saadoptionsystem/Main/pages/AbondonedChild/ReportAbondonedChild.dart';
+import 'package:saadoptionsystem/Main/pages/AdoptAChild/AdoptersScreen.dart';
 import 'package:saadoptionsystem/Main/pages/AdoptAChild/TermsAndConditions.dart';
+import 'package:saadoptionsystem/Main/pages/GivingUpAChild/GiveAChildscreen.dart';
 import 'package:saadoptionsystem/Main/pages/GivingUpAChild/GiveUpAChild.dart';
 import 'package:saadoptionsystem/Main/pages/MissingChild/ReportMissingChild.dart';
 import 'package:saadoptionsystem/Main/pages/NearbyPlaces/main_screen_page.dart';
 import 'package:saadoptionsystem/Main/pages/NewsFeed/news.dart';
-import 'package:saadoptionsystem/Main/pages/Profile/main.dart';
+
 
 
 enum NavigationEvents {
@@ -29,10 +31,10 @@ class NavigationBloc extends Bloc<NavigationEvents, NavigationStates> {
   Stream<NavigationStates> mapEventToState(NavigationEvents event) async* {
     switch (event) {
       case NavigationEvents.AdoptChildClickedEvent:
-        yield Terms();
+        yield AdoptersScreen();
         break;
       case NavigationEvents.GiveUpChildClickedEvent:
-        yield GiveUpPage();
+        yield GiveAChildscreen();
         break;
       case NavigationEvents.ReportChildClickedEvent:
         yield ReportChildPage();
@@ -43,9 +45,8 @@ class NavigationBloc extends Bloc<NavigationEvents, NavigationStates> {
       case NavigationEvents.NearbyCentresChildClickedEvent:
         yield MainScreenPage();
         break;
-      case NavigationEvents.ProfileChildClickedEvent:
-        yield UserProfile();
-        break;
+
+
     }
   }
 }
