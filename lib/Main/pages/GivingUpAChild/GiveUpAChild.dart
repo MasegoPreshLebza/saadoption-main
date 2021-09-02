@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:saadoptionsystem/Main/bloc.navigation_bloc/navigation_bloc.dart';
+import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/background2.dart';
 import 'package:saadoptionsystem/Main/pages/GivingUpAChild/AptitudeTestGiveUp.dart';
-import 'package:saadoptionsystem/Splash/background.dart';
+
 import 'package:saadoptionsystem/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -11,6 +12,13 @@ class GiveUpAChild extends StatelessWidget with NavigationStates {
   TextEditingController Ethnicity = new TextEditingController();
   TextEditingController Idnumber = new TextEditingController();
   TextEditingController HomeAdress = new TextEditingController();
+  TextEditingController Decision = new TextEditingController();
+  TextEditingController Drugs = new TextEditingController();
+  TextEditingController AgeChild = new TextEditingController();
+  TextEditingController AgeParent = new TextEditingController();
+  TextEditingController BirthPlace = new TextEditingController();
+  TextEditingController neighbourhood = new TextEditingController();
+  TextEditingController history = new TextEditingController();
   @override
   Widget build(BuildContext context) {
 
@@ -22,8 +30,14 @@ class GiveUpAChild extends StatelessWidget with NavigationStates {
           child: Column(
             children: [
               Text(
-                "ADOPT A CHILD",
+                "PARENT AND GUARDIAN QUESTIONS AND INSTRUCTIONS",
                 style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                " ",
+              ),
+              Text(
+                " ",
               ),
               TextField(
                 controller: FullName,
@@ -53,6 +67,49 @@ class GiveUpAChild extends StatelessWidget with NavigationStates {
               SizedBox(
                 height: 10.0,
               ),
+              TextField(
+                decoration:
+                InputDecoration(hintText: "How old is the child?*"),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText:
+                  "How old is the Parent/guardian?*",
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "The child birth place?*",
+                  hintMaxLines: 2,
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "Briefly describe the neighbourhood and amenities?*",
+                  hintMaxLines: 2,
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "Do both parents know about the decision taken? If yes, what is their take about it?*",
+                  hintMaxLines: 3,
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
               RoundedButton(
                 text: "UPLOAD DOCUMENTS",
               ),
@@ -63,7 +120,12 @@ class GiveUpAChild extends StatelessWidget with NavigationStates {
                     "Full Name": FullName.text,
                     "Ethnicity": Ethnicity.text,
                     "ID number": Idnumber.text,
-                    "Home Address": HomeAdress.text
+                    "Home Address": HomeAdress.text,
+                    "AgeChild":AgeChild.text,
+                    "AgeParent":AgeParent.text,
+                    "BirthPlace":BirthPlace.text,
+                    "neighbourhood":neighbourhood.text,
+                    "history": history.text,
                   };
                   FirebaseFirestore.instance.collection("Adopter").add(data);
                   Navigator.push(

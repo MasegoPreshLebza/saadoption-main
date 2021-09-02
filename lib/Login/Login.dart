@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/background2.dart';
 import 'package:saadoptionsystem/Main/pages/AdoptAChild/TermsAndConditions.dart';
 import 'package:saadoptionsystem/Main/sidebar/sidebar_layout.dart';
 import '../Register/SignUp.dart';
@@ -122,6 +123,9 @@ class _LoginState extends State<Login> {
                   ],
                 ),
               ),
+            ),
+            Text(
+              " ",
             ),
             GestureDetector(
               child: Text('Create an Account?'),

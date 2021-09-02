@@ -60,10 +60,37 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-    Text(
-    "DOCUMENT UPLOAD",
-    style: TextStyle(fontWeight: FontWeight.bold),
-    ),
+          Text(
+            "REQUIRED DOCUMENTS ARE:",
+              style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                " ",
+              ),
+              Text(
+                " ",
+              ),
+          Text(
+                "Form 61 and form 62(within 60 days)",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+          Text(
+            "Current family photograph/ photograph of the couple or person adopting a child",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            "Birth certificate/Proof of date of birth of the prospective adoptive parents",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            "Proof of residence",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(
+                "DOCUMENT UPLOAD BELOW",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+
               SizedBox(height: 48),
               ButtonWidget(
                 text: 'Select File',
