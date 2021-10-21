@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:saadoptionsystem/Main/sidebar/sidebar_layout.dart';
 import 'package:saadoptionsystem/Splash/background.dart';
-
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:saadoptionsystem/rounded_button.dart';
 
 import 'AdoptersScreen.dart';
@@ -20,10 +20,14 @@ class CheckBoxWidget extends State<CheckBox> {
   bool isChecked = false;
 
   @override
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Background(
-
+    return WillPopScope(
+        onWillPop: () {
+          moveToLastScreen();
+        },
+      child: Background(
       child: Container(
         padding: EdgeInsets.all(32),
         child: Column(
@@ -36,7 +40,8 @@ class CheckBoxWidget extends State<CheckBox> {
             SizedBox(height: 20),
         Image.asset(
           'assets/images/logo.png',
-          height: size.height * 0.30,
+          height: size.height * 0.48,
+          width: size.width * 30.0,
         ),
             SizedBox(height: 20),
             buildButton(
@@ -81,7 +86,7 @@ class CheckBoxWidget extends State<CheckBox> {
           ],
         ),
       ),
-    );
+    ));
   }
 
   void displayMessage() {
@@ -120,4 +125,7 @@ class CheckBoxWidget extends State<CheckBox> {
         child: Text(text, style: TextStyle(fontSize: 20)),
         onPressed: onClicked,
       );
+  void moveToLastScreen() {
+    Navigator.pop(context);
+  }
 }

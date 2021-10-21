@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:saadoptionsystem/Main/bloc.navigation_bloc/navigation_bloc.dart';
 import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/background2.dart';
@@ -6,8 +7,17 @@ import 'package:saadoptionsystem/Main/pages/GivingUpAChild/AptitudeTestGiveUp.da
 import 'package:saadoptionsystem/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../../constants.dart';
 
-class GiveUpAChild extends StatelessWidget with NavigationStates {
+
+
+class GiveUpAChild extends StatefulWidget with NavigationStates {
+  @override
+  _GiveUpAChildState  createState() => _GiveUpAChildState();
+}
+
+
+class _GiveUpAChildState extends State<GiveUpAChild> {
   TextEditingController FullName = new TextEditingController();
   TextEditingController Ethnicity = new TextEditingController();
   TextEditingController Idnumber = new TextEditingController();
@@ -19,6 +29,7 @@ class GiveUpAChild extends StatelessWidget with NavigationStates {
   TextEditingController BirthPlace = new TextEditingController();
   TextEditingController neighbourhood = new TextEditingController();
   TextEditingController history = new TextEditingController();
+  DatabaseReference _ref;
   @override
   Widget build(BuildContext context) {
 
@@ -31,7 +42,7 @@ class GiveUpAChild extends StatelessWidget with NavigationStates {
             children: [
               Text(
                 "PARENT AND GUARDIAN QUESTIONS AND INSTRUCTIONS",
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headline6.copyWith(color: kPrimaryColor),
               ),
               Text(
                 " ",
@@ -62,7 +73,7 @@ class GiveUpAChild extends StatelessWidget with NavigationStates {
               ),
               TextField(
                 controller: HomeAdress,
-                decoration: InputDecoration(hintText: "Home Adrress"),
+                decoration: InputDecoration(hintText: "Home Address"),
               ),
               SizedBox(
                 height: 10.0,
@@ -94,7 +105,7 @@ class GiveUpAChild extends StatelessWidget with NavigationStates {
               ),
               TextField(
                 decoration: InputDecoration(
-                  hintText: "Briefly describe the neighbourhood and amenities?*",
+                  hintText: "Where do you stay?Briefly describe the neighbourhood and amenities?*",
                   hintMaxLines: 2,
                 ),
               ),
@@ -115,7 +126,7 @@ class GiveUpAChild extends StatelessWidget with NavigationStates {
               ),
               RoundedButton(
                 text: "SUBMIT",
-                press: () {
+                press: () { saveUser();
                   Map<String, dynamic> data = {
                     "Full Name": FullName.text,
                     "Ethnicity": Ethnicity.text,
@@ -127,7 +138,7 @@ class GiveUpAChild extends StatelessWidget with NavigationStates {
                     "neighbourhood":neighbourhood.text,
                     "history": history.text,
                   };
-                  FirebaseFirestore.instance.collection("Adopter").add(data);
+                  FirebaseFirestore.instance.collection("Give up a child").add(data);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -144,6 +155,35 @@ class GiveUpAChild extends StatelessWidget with NavigationStates {
         ),
       ),
     );
+  }
+  @override
+  void initState() {
+    super.initState();
+    _ref = FirebaseDatabase.instance.reference().child('GiveUpAChild');
+  }
+  saveUser() {
+    String fullName = FullName.text;
+    String ethnicity= Ethnicity.text;
+    String agechild = AgeChild.text;
+    String homeAddress = HomeAdress.text;
+
+
+    Map<String, dynamic> storeStaff = {
+
+      'Full Name':fullName,
+      'Ethnicity': ethnicity,
+      'AgeChild': agechild,
+      'HomeAddress':homeAddress,
+
+
+
+
+    };
+    _ref.push().set(storeStaff).then((value) {
+      setState(() {
+
+      });
+    });
   }
 
 }

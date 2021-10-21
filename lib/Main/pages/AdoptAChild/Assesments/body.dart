@@ -9,7 +9,6 @@ import 'question_controller.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/question_controller.dart';
 
-import 'progress_bar.dart';
 
 class BodyQuiz extends StatelessWidget with NavigationStates{
   const BodyQuiz({
@@ -21,16 +20,30 @@ class BodyQuiz extends StatelessWidget with NavigationStates{
     // So that we have acccess our controller
     QuestionController _questionController = Get.put(QuestionController());
     return Stack(
+
       children: [
+
+
         SvgPicture.asset("assets/icons/bg.svg", fit: BoxFit.fill),
         SafeArea(
+        child: Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+        image:AssetImage(
+        "assets/images/SA_Adoption_system.png"),
+        fit: BoxFit.cover,
+        ),
+        ),
           child: Column(
+
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                child: ProgressBar(),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                "Please answer the following questions",
+                style: Theme.of(context).textTheme.headline6.copyWith(color: kPrimaryColor),
               ),
               SizedBox(height: kDefaultPadding),
               Padding(
@@ -41,10 +54,7 @@ class BodyQuiz extends StatelessWidget with NavigationStates{
                     TextSpan(
                       text:
                           "Question ${_questionController.questionNumber.value}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline4
-                          .copyWith(color: kPrimaryColor),
+                      style: Theme.of(context).textTheme.headline4.copyWith(color: kPrimaryColor),
                       children: [
                         TextSpan(
                           text: "/${_questionController.questions.length}",
@@ -72,12 +82,17 @@ class BodyQuiz extends StatelessWidget with NavigationStates{
                 ),
               ),
 
-    RoundedButton(
-    text: "SAVE",
-    press: () {
-    Navigator.push(context, MaterialPageRoute(
-    builder: (context) {
-    return FinancialPage();
+
+              RoundedButton(
+                text: "DONE",
+                alignment: Alignment.center,
+                side: BorderSide(width:25),
+                press: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return FinancialPage();
+
+
     },
     )
     );
@@ -88,9 +103,11 @@ class BodyQuiz extends StatelessWidget with NavigationStates{
 
     ),
     ),
-    ],
+        )],
+
 
     );
 
   }
+
 }

@@ -6,6 +6,11 @@ class AdoptersScreen extends StatelessWidget with NavigationStates {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text("ADOPT A CHILD"),
+          centerTitle: true,
+
+        ),
       body: SingleChildScrollView(
         child: AdopterPage(),
       ),

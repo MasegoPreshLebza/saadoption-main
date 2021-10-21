@@ -5,11 +5,18 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/Resultspage/screens/results.dart';
 import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/quiz_screen.dart';
 import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/widget/button_widget.dart';
 
 import '../../../../rounded_button.dart';
+
+
 import 'api/firebase_api.dart';
+
+
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,11 +24,10 @@ Future main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-
   await Firebase.initializeApp();
-
   runApp(FinancialPage());
 }
+
 
 class FinancialPage extends StatelessWidget {
   static final String title = 'Document Upload';
@@ -49,6 +55,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     final fileName = file != null ? basename(file.path) : 'No File Selected';
 
+
     return Scaffold(
       appBar: AppBar(
         title: Text(FinancialPage.title),
@@ -56,15 +63,22 @@ class _MainPageState extends State<MainPage> {
 
       ),
       body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                "assets/images/SA_Adoption_system.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
         padding: EdgeInsets.all(32),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-    Text(
-    "FINANCIAL DOCUMENTS",
-    style: TextStyle(fontWeight: FontWeight.bold),
-    ),
+              Text(
+                "FINANCIAL DOCUMENTS",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               SizedBox(height: 48),
               ButtonWidget(
                 text: 'Select File',
@@ -87,20 +101,26 @@ class _MainPageState extends State<MainPage> {
 
               SizedBox(height: 20),
               RoundedButton(
-                text: "SAVE",
-                color:Colors.green,
-                press: () {
-    },
+                text: "SUBMIT",
+                color: Colors.green,
+                press: () {mail();
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return HomePage();
+                    }),
+                  );
+                },
               ),
-],
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
 
   Future selectFile() async {
-
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
 
     if (result == null) return;
@@ -126,21 +146,53 @@ class _MainPageState extends State<MainPage> {
     print('Download-Link: $urlDownload');
   }
 
-  Widget buildUploadStatus(UploadTask task) => StreamBuilder<TaskSnapshot>(
-    stream: task.snapshotEvents,
-    builder: (context, snapshot) {
-      if (snapshot.hasData) {
-        final snap = snapshot.data;
-        final progress = snap.bytesTransferred / snap.totalBytes;
-        final percentage = (progress * 100).toStringAsFixed(2);
+  Widget buildUploadStatus(UploadTask task) =>
+      StreamBuilder<TaskSnapshot>(
+        stream: task.snapshotEvents,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final snap = snapshot.data;
+            final progress = snap.bytesTransferred / snap.totalBytes;
+            final percentage = (progress * 100).toStringAsFixed(2);
 
-        return Text(
-          '$percentage %',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        );
-      } else {
-        return Container();
+            return Text(
+              '$percentage %',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            );
+          } else {
+            return Container();
+          }
+        },
+      );
+
+  mail() async {
+    String username = 'masegopreciousmmotlana@gmail.com';
+    String password = 'Masego@0746461009';
+
+    final smtpServer = gmail(username, password);
+
+
+    // Create message.
+    final message = Message()
+      ..from = Address(username, 'Catholic womans league adoption agency')
+      ..recipients.add('masegopreciousmmotlana@gmail.com')
+      ..ccRecipients.addAll([
+        'masegopreciousmmotlana@gmail.com',
+        'masegopreciousmmotlana@gmail.com'
+      ])
+      ..bccRecipients.add(Address('masegopreciousmmotlana@gmail.com'))
+      ..subject = 'APPLICANT:  ${DateTime.now()}'
+      ..text = 'An applicant has answered and uploaded the required documents'
+      ..html = "<h1>Good Day</h1>\n<p>An applicant has answered and uploaded the required documents.Login the dashboard to see more details.\n Kind regards,\n SA Adoption System</p>";
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
       }
-    },
-  );
+    }
+  }
 }

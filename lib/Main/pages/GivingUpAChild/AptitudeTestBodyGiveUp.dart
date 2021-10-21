@@ -1,6 +1,7 @@
 import 'package:saadoptionsystem/Main/bloc.navigation_bloc/navigation_bloc.dart';
 import 'package:flutter/material.dart';
 import '../../../../rounded_button.dart';
+import '../../../constants.dart';
 import 'Financial PageGiveUp.dart';
 import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/background2.dart';
 import 'package:link/link.dart';
@@ -21,7 +22,7 @@ class AptitudeTestBodyGiveUp extends StatelessWidget with NavigationStates {
           children: [
             Text(
               "PARENT AND GUARDIAN QUESTIONS AND INSTRUCTIONS",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.headline6.copyWith(color: kPrimaryColor),
             ),
             Text(
               " ",
@@ -135,4 +136,5 @@ class AptitudeTestBodyGiveUp extends StatelessWidget with NavigationStates {
       ),
     );
   }
+
 }

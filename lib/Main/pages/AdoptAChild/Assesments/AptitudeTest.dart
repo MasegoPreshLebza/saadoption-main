@@ -6,6 +6,11 @@ class AptitudeTest extends StatelessWidget with NavigationStates {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text("Aptitude Test"),
+          centerTitle: true,
+
+        ),
       body: SingleChildScrollView(
         child: AptitudeTestBody(),
       ),

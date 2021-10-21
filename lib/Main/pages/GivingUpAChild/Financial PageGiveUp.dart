@@ -5,10 +5,16 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/Resultspage/screens/results.dart';
+import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/Video%20Player.dart';
 import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/quiz_screen.dart';
 import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/widget/button_widget.dart';
-
+import 'package:saadoptionsystem/Main/pages/AdoptAChild/Assesments/background2.dart';
 import '../../../../rounded_button.dart';
+import '../../../constants.dart';
+import 'Give Up A child Results Page.dart';
 import 'api/firebase_api.dart';
 
 Future main() async {
@@ -55,6 +61,13 @@ class _MainPageState extends State<MainPage> {
         centerTitle: true,
       ),
       body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image:AssetImage(
+                "assets/images/SA_Adoption_system.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
         padding: EdgeInsets.all(32),
         child: Center(
           child: Column(
@@ -62,7 +75,7 @@ class _MainPageState extends State<MainPage> {
             children: [
           Text(
             "REQUIRED DOCUMENTS ARE:",
-              style: TextStyle(fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.headline6.copyWith(color: kPrimaryColor),
               ),
               Text(
                 " ",
@@ -70,25 +83,34 @@ class _MainPageState extends State<MainPage> {
               Text(
                 " ",
               ),
+              SizedBox(height: 40),
           Text(
-                "Form 61 and form 62(within 60 days)",
-                style: TextStyle(fontWeight: FontWeight.bold),
+            "-Form 61 and form 62(within 60 days)",
+            style: TextStyle(fontWeight: FontWeight.bold),
+            textAlign: TextAlign.left,
               ),
           Text(
-            "Current family photograph/ photograph of the couple or person adopting a child",
+            "-Current family photograph/ photograph of the couple or person adopting a child",
             style: TextStyle(fontWeight: FontWeight.bold),
+            textAlign: TextAlign.left,
           ),
           Text(
-            "Birth certificate/Proof of date of birth of the prospective adoptive parents",
+            "-Birth certificate/Proof of date of birth of the prospective adoptive parents",
             style: TextStyle(fontWeight: FontWeight.bold),
+            textAlign: TextAlign.left,
           ),
           Text(
-            "Proof of residence",
+            "-Proof of residence",
             style: TextStyle(fontWeight: FontWeight.bold),
+            textAlign: TextAlign.start,
           ),
+              Text(
+                " ",
+              ),
           Text(
                 "DOCUMENT UPLOAD BELOW",
                 style: TextStyle(fontWeight: FontWeight.bold),
+
               ),
 
               SizedBox(height: 48),
@@ -113,9 +135,16 @@ class _MainPageState extends State<MainPage> {
 
               SizedBox(height: 20),
               RoundedButton(
-                text: "SAVE",
+                text: "SUBMIT",
                 color:Colors.green,
-                press: () {
+                press: () { mail();
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return HomePage();
+                    }),
+                  );
     },
               ),
 ],
@@ -169,4 +198,34 @@ class _MainPageState extends State<MainPage> {
       }
     },
   );
+  mail() async {
+    String username = 'masegopreciousmmotlana@gmail.com';
+    String password = 'Masego@0746461009';
+
+    final smtpServer = gmail(username, password);
+
+
+    // Create message.
+    final message = Message()
+      ..from = Address(username, 'Catholic womans league adoption agency')
+      ..recipients.add('masegopreciousmmotlana@gmail.com')
+      ..ccRecipients.addAll([
+        'masegopreciousmmotlana@gmail.com',
+        'masegopreciousmmotlana@gmail.com'
+      ])
+      ..bccRecipients.add(Address('masegopreciousmmotlana@gmail.com'))
+      ..subject = 'APPLICANT:  ${DateTime.now()}'
+      ..text = 'An applicant that wants to give up a child for adoption has answered and uploaded the required documents'
+      ..html = "<h1>Good Day</h1>\n<p>An applicant that wants to give up a child for adoption has answered and uploaded the required documents.Login the dashboard to see more details.\n Kind regards,\n SA Adoption System</p>";
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
+  }
 }

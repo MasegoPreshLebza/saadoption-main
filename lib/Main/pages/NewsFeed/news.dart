@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:saadoptionsystem/Main/bloc.navigation_bloc/navigation_bloc.dart';
+import 'package:saadoptionsystem/Main/pages/Chatbot/chatbot.dart';
 import '../../../constants.dart';
 import 'FeedDataModel.dart';
 import 'package:flutter/services.dart' as rootBundle;
@@ -28,7 +29,7 @@ class NewsFeedScreen extends StatelessWidget with NavigationStates {
                       elevation: 5,
                       margin: EdgeInsets.symmetric(horizontal: 10,vertical: 6),
                       child: Container(
-                        color: Colors.orangeAccent,
+                        color: Colors.white,
                         padding: EdgeInsets.all(8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -66,11 +67,33 @@ class NewsFeedScreen extends StatelessWidget with NavigationStates {
         ),
 
         bottomNavigationBar: BottomNavigationBar(
+          iconSize: 3,
+          backgroundColor: Colors.greenAccent,
     items: [
-    BottomNavigationBarItem(label: 'Feed', icon: Icon(Icons.refresh)),
-    BottomNavigationBarItem(label: 'Chat', icon: Icon(Icons.chat)),
-    ],
-    )
+    BottomNavigationBarItem(label: 'Feed', icon: IconButton(
+      icon: const Icon(Icons.refresh),
+      onPressed: () {
+
+        }
+    ),
+        ),
+
+    BottomNavigationBarItem(label: 'Chat', icon: IconButton(
+        icon: const Icon(Icons.chat),
+        onPressed: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) {
+    return Chatbot();
+    }
+    ),
+    );
+    },
+    ),
+    ),
+      ],
+    ),
     );
   }
 
@@ -84,6 +107,7 @@ class NewsFeedScreen extends StatelessWidget with NavigationStates {
     return  AppBar(
       title: Text("NewsFeed to keep you Updated"),
       centerTitle: true,
+      backgroundColor: Colors.greenAccent,
     );
   }
 

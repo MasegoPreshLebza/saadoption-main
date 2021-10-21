@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saadoptionsystem/Main/sidebar/sidebar_layout.dart';
+import 'package:saadoptionsystem/Splash/Splash.dart';
 import 'package:saadoptionsystem/Splash/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'constants.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: WelcomeScreen(),
+      home: SplashScreen(),
       routes: <String, WidgetBuilder>{
         "Login": (BuildContext context) => Login(),
         "SideLayout": (BuildContext context) => SideBarLayout(),

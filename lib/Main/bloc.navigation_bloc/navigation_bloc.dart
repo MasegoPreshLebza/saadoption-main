@@ -5,7 +5,8 @@ import 'package:saadoptionsystem/Main/pages/AdoptAChild/TermsAndConditions.dart'
 import 'package:saadoptionsystem/Main/pages/GivingUpAChild/GiveAChildscreen.dart';
 import 'package:saadoptionsystem/Main/pages/GivingUpAChild/GiveUpAChild.dart';
 import 'package:saadoptionsystem/Main/pages/MissingChild/ReportMissingChild.dart';
-import 'package:saadoptionsystem/Main/pages/NearbyPlaces/main_screen_page.dart';
+import 'package:saadoptionsystem/Main/pages/NearbyPlaces/NearbyCentres.dart';
+
 import 'package:saadoptionsystem/Main/pages/NewsFeed/news.dart';
 
 
@@ -43,7 +44,7 @@ class NavigationBloc extends Bloc<NavigationEvents, NavigationStates> {
         yield AbondonedChildPage();
         break;
       case NavigationEvents.NearbyCentresChildClickedEvent:
-        yield MainScreenPage();
+        yield NearbyCentres();
         break;
 
 
